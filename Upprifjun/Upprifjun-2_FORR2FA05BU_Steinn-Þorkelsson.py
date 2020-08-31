@@ -45,8 +45,9 @@ while on:
         print(f"200m Lengd = {200 * breidd / 4046} Ekrur.")
     elif val == "4":
         afangi = input("Heiti áfanga: ")
-        if afangi[0:3].isupper() and afangi[3:7].isdigit():
-            print(f"{afangi} er rétt skammstöfun.")
+        if len(afangi) == 7:
+            if afangi[0:3].isupper() and afangi[3:7].isdigit():
+                print(f"{afangi} er rétt skammstöfun.")
         else:
             print(f"{afangi} er ekki rétt skammstöfun.")
     elif val == "5":
