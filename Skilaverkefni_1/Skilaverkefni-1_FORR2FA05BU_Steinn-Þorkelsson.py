@@ -12,7 +12,22 @@ while on:
 
     val = input("Veldu Forrit: ")
     if val == "1":
-        nafn = input("Sláðun inn 5 nöfn með millibili: ")
+        nofn = input("Sláðun inn 5 nöfn með millibili: ")
+
+        nafnalisti = []
+        temp = ''
+        for c in nofn:
+            if c == ' ':
+                nafnalisti.append(temp)
+                temp = ''
+            else:
+                temp += c
+
+        # fyrir síðasta orðið
+        if temp:
+            nafnalisti.append(temp)
+        print()
+
         on1 = True
         while on1:
             print("Hvað viltu gera við nöfnin?")
@@ -22,20 +37,12 @@ while on:
             print("4.Birta eitt nafn eftir því hvaða númer 1-5 var valið.")
             print("5. Hætta í forriti.")
             val1 = input("Veldu aðgerð: ")
-            listi = nafn.split(" ")
 
-            if val1 == "1":
-                print(nafn)
-
-            elif val1 == "2":
-                radad = sorted(listi)
+            if val == "1":
+                print(nafnalisti)
+            if val == "2":
+                radad = sorted(nafnalisti)
                 print(radad)
-            elif val1 == "3":
-                ofugt = sorted(listi, reverse=True)
-                print(ofugt)
-            elif val1 == "4":
-                tala = int(input("Veldu tölu frá 1-5: "))
-                print(listi[tala - 1])
             elif val1 == "5":
                 on1 = False
 
@@ -50,16 +57,39 @@ while on:
         random.reverse()
         for i in range(0, len(random), 6):
             print(*random[i:i+4], sep=' ')
-        teljari = 1
-            for x in listi:
-                if teljari % 6 == 0:
-                    print(x)
 
+    elif val == "3":
+        nemendur = int(input("Hvað er margir í forr2 áfanganum?"))
+        nofn = input("Nöfn nemendana: ")
 
-    elif val == "4":
-        oftlisti = []
-        oft = int(input("Hversu oft viltu kasta teningi 1?: "))
-        teningakast = []
+        nafnalisti = []
+        tmp = ''
+        for c in nofn:
+            if c == ' ':
+                nafnalisti.append(tmp)
+                tmp = ''
+            else:
+                tmp += c
+
+        # fyrir síðasta orðið
+        if tmp:
+            nafnalisti.append(tmp)
+        print()
+
+        #nýr listi með nöfnunum raðað eftir stafrófsröð
+        radadnafn = sorted(nafnalisti)
+
+        # prenta listan eitt orð í einu
+        print(*nafnalisti, sep="\n")
+        print()
+
+        eyda = input("Veldu nafn til þess að eyða út: ")
+        nafnalisti.remove(eyda)
+        print(nafnalisti)
+
+        vidbot = input("Bættu við nafni í listan")
+        nafnalisti.append(vidbot)
+        print(nafnalisti)
 
 
 
