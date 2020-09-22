@@ -30,7 +30,6 @@ def minnsta(listi):
 
 
 
-
 def summa(listi):
     summur = 0
     for i in listi:
