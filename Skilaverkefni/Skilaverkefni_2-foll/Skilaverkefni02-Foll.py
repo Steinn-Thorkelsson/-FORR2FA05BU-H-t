@@ -8,7 +8,7 @@ def fahren_cel(f):
 def cel_fahren(c):
     f = c * 1.8 + 32
     return round(f, 3)
-##############################
+##############################################
 
 
 # Dæmi 2
@@ -22,20 +22,48 @@ def hversuhratt(h):
         print(f"Þú ert með {refsistig} refsistig")
         if refsistig >= 12:
             print("þú hefur misst Ökuskírteinið þitt vegna hraðaksturs")
-##################################
+##############################################
 
 
+# Dæmi 3
 def reiknaveldi(tala, veldi):
     # ** er til þess að reikna veldi
     utkoma = tala**veldi
     return utkoma
+##############################################
 
 
+# Dæmi 4
+def reiknabmi(kg, m):
+    bmi = round(kg / (m * m), 2)
+    return bmi
+##############################################
+
+
+# Dæmi 5 
+def gallon_i_litra(g):
+    liter = g * 3.785
+    return liter
+
+
+def litrar_i_gallon(l):
+    gallon = l / 3.785
+    return gallon
+##############################################
 on = True
 
 while on:
     print("1. Celslíus og farenheit")
     print("2. Hraðatakmörk")
+    print("3. Veldisreikningur")
+    print("4. BMI")
+    print("5. Gallon og Lítrar")
+    print("6. ")
+    print("7. ")
+    print("8. ")
+    print("9. Hætta í forriti")
+    print()
+    # ég nota ekki int(input("")) til þess að forðast villu meldingu ef að notandinn slær inn char í staðinn fyrir int 
     val = input("Veldu Lið: ")
 
     if val == "1":
@@ -59,3 +87,51 @@ while on:
         v = float(input("Sláðu inn veldistölu með kommu eða ekki: "))
         print(reiknaveldi(t, v))
         print()
+    
+    elif val == "4":
+        w = float(input("Sláðu inn þyngd í kg: "))
+        h = float(input("Sláðu inn hæð í metrurm: "))
+        bmi = reiknabmi(w, h)
+         
+        if bmi >= 18.4 and bmi  < 26:
+            print(f"Þitt bmi er {bmi}. Þú ert í kjörþyngd")
+        
+        elif bmi < 18.5:
+            print(f"Þitt bmi er {bmi}. Þú ert í undirþyngd")
+
+        elif bmi >= 25 and bmi < 30:
+            print(f"Þitt bmi er {bmi}. Þú ert í yfirþyngd")
+            
+        elif bmi >= 30:
+            print(f"Þitt bmi er {bmi}. Þú ert í yfirþyngd")
+        
+        else:
+            print("Villa")
+
+    elif val == "5":
+        print("1. Gallon í Lítra")
+        print("2. Lítrar í Gallon")
+        val5 = input("Veldu aðgerð: ")
+        print()
+
+        if val5 == "1":
+            gallon = int(input("Sláðu inn magn í Gallon: "))
+            print()
+            print(f"{gallon} Gallon er {round(gallon_i_litra(gallon), 2)} Lítrar")
+            print()
+
+        if val5 == "2":
+            liter = int(input("Sláðu inn magn í Lítrum: "))
+            print()
+            print(f"{liter} Lítrar er {round(litrar_i_gallon(liter), 2)} Gallon")
+            print()
+    
+    elif val == "6":
+        pass
+    
+    elif val == "7":
+        pass
+    elif val == "8":
+        pass
+    elif val == "9":
+        on = False
