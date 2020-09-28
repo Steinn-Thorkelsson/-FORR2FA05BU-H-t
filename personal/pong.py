@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+
 def ball_animation():
     global ball_speed_x, ball_speed_y
     ball.x += ball_speed_x
@@ -39,9 +40,11 @@ def opponent_ai():
 
 def ball_restart():
     global ball_speed_x, ball_speed_y
-    ball.center = (screen_width/2, screen_height/2)
+    ball.center = (screen_width / 2, screen_height / 2)
     ball_speed_y *= random.choice((1, -1))
     ball_speed_x *= random.choice((1, -1))
+
+
 # General setup
 pygame.init()
 clock = pygame.time.Clock()
@@ -53,10 +56,9 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong')
 
 # Game rectangles
-ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 30, 30)
+ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)
 player = pygame.Rect(screen_width - 20, screen_height / 2 - 70, 10, 140)
-opponent = pygame.Rect(10, screen_height/2 - 70, 10, 140)
-
+opponent = pygame.Rect(10, screen_height / 2 - 70, 10, 140)
 
 bg_color = pygame.Color('grey12')
 light_grey = (200, 200, 200)
@@ -85,7 +87,6 @@ while True:
             if event.key == pygame.K_LEFT:
                 player_speed_x -= 10
 
-
         # if button released
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
@@ -106,7 +107,7 @@ while True:
     pygame.draw.rect(screen, orange_color, player)
     pygame.draw.rect(screen, blue_color, opponent)
     pygame.draw.ellipse(screen, light_grey, ball)
-    pygame.draw.aaline(screen, light_grey, (screen_width/2, 0), (screen_width/2, screen_height))
+    pygame.draw.aaline(screen, light_grey, (screen_width / 2, 0), (screen_width / 2, screen_height))
     # Updating the window
     pygame.display.flip()
     clock.tick(60)
