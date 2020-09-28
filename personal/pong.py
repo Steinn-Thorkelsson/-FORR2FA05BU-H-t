@@ -22,8 +22,8 @@ def player_animation():
         player.top = 0
     if player.bottom >= screen_height:
         player.bottom = screen_height
-    if player.left <= 0:
-        player.left = 0
+    if player.left <= screen_width/2:
+        player.left = screen_width/2
     if player.right >= screen_width:
         player.right = screen_width
 
