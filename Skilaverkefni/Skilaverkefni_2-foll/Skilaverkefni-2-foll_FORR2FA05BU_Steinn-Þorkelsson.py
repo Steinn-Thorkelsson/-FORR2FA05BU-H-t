@@ -1,3 +1,4 @@
+# FORR2 - Skilaverkefni 2 FÖLL - Steinn Þorkelsson
 import random
 
 
