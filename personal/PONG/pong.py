@@ -118,7 +118,7 @@ ball_speed_x = 7 * random.choice((1, -1))
 ball_speed_y = 7 * random.choice((1, -1))
 player_speed_y = 0
 player_speed_x = 0
-opponent_speed = 7
+opponent_speed = 15
 
 # Text Variables
 player_score = 0

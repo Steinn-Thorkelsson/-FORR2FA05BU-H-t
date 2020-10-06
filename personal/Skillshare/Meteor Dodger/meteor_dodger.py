@@ -117,7 +117,7 @@ spaceship_group.add(spaceship)
 meteor_group = pygame.sprite.Group()
 
 METEOR_EVENT = pygame.USEREVENT
-pygame.time.set_timer(METEOR_EVENT, 100)
+pygame.time.set_timer(METEOR_EVENT, 250)
 
 laser_group = pygame.sprite.Group()
 
