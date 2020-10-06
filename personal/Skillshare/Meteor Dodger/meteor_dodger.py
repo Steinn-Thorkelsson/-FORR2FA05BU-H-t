@@ -6,7 +6,10 @@ import random
 class SpaceShip(pygame.sprite.Sprite):
     def __init__(self, path, x_pos, y_pos, speed):
         super().__init__()
-        self.image = pygame.image.load(path)
+        self.uncharged = pygame.image.load(path)
+        self.charged = pygame.image.load('spaceship_charged.png')
+
+        self.image = self.uncharged
         self.rect = self.image.get_rect(center=(x_pos, y_pos))
         self.shield_surface = pygame.image.load('shield.png')
         self.health = 5
@@ -29,6 +32,12 @@ class SpaceShip(pygame.sprite.Sprite):
 
     def get_damage(self, damage_amaount):
         self.health -= damage_amaount
+
+    def charge(self):
+        self.image = self.charged
+
+    def discharge(self):
+        self.image = self.uncharged
 
 
 class Meteor(pygame.sprite.Sprite):
@@ -62,6 +71,7 @@ class Laser(pygame.sprite.Sprite):
 
 
 def main_game():
+    global laser_active
     laser_group.draw(screen)
     spaceship_group.draw(screen)
     meteor_group.draw(screen)
@@ -76,40 +86,55 @@ def main_game():
         pygame.mixer.Sound.play(meteor_impact_spaceship)
     for laser in laser_group:
         pygame.sprite.spritecollide(laser, meteor_group, True)
-        pygame.mixer.Sound.play(laser_impact_meteor)
+        # pygame.mixer.Sound.play(laser_impact_meteor)
+
+    # Laser timer
+    if pygame.time.get_ticks() - laser_timer >= 1000:
+        laser_active = True
+        spaceship_group.sprite.charge()
 
     return 1
 
 
 def end_game():
-    retry_surface = retry_font.render('Press SPACE to Restart', True, (200, 255, 255))
-    retry_rect = retry_surface.get_rect(center=(640, 560))
+    retry_surface = retry_font.render('Press SPACE to Restart or Q to quit', True, (200, 255, 255))
+    retry_rect = retry_surface.get_rect(center=(640, 510))
     screen.blit(retry_surface, retry_rect)
 
     gover_surface = game_font.render('Game Over :(', True, (200, 255, 5))
-    gover_rect = gover_surface.get_rect(center=(640, 360))
+    gover_rect = gover_surface.get_rect(center=(640, 310))
     screen.blit(gover_surface, gover_rect)
 
     score_surface = retry_font.render(f'Score: {score}', True, (200, 255, 5))
-    score_rect = score_surface.get_rect(center=(640, 450))
+    score_rect = score_surface.get_rect(center=(640, 400))
     screen.blit(score_surface, score_rect)
+
+    pygame.mixer.Sound.play(laser_impact_meteor)
 
 
 def score_text(score_live):
     score_surface = score_font.render(f'Score: {score_live}', True, (200, 255, 5))
-    score_rect = score_surface.get_rect(center=(1200, 15))
+    score_rect = score_surface.get_rect(center=(1100, 15))
     screen.blit(score_surface, score_rect)
 
 
+# Initial Setup
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
+pygame.mouse.set_visible(False)
 clock = pygame.time.Clock()
-game_font = pygame.font.Font(None, 100)
-retry_font = pygame.font.Font(None, 40)
-score_font = pygame.font.Font(None, 30)
-score = 0
 
+# Fonts
+font_path = '8bitOperatorPlus-Bold.ttf'
+game_font = pygame.font.Font(font_path, 100)
+retry_font = pygame.font.Font(font_path, 40)
+score_font = pygame.font.Font(font_path, 30)
+
+score = 0
+laser_timer = 0
+laser_active = False
+# Sprites
 spaceship = SpaceShip('Spaceship.png', 640, 500, 7)
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
@@ -123,7 +148,7 @@ laser_group = pygame.sprite.Group()
 
 # Sounds
 laser_shoot = pygame.mixer.Sound('laser_shoot.wav')
-laser_impact_meteor = pygame.mixer.Sound('laser_impact_meteor.wav')
+laser_impact_meteor = pygame.mixer.Sound('lego-yoda-death-sound-effect.wav')
 meteor_impact_spaceship = pygame.mixer.Sound('meteor_impact_spaceship.wav')
 
 while True:
@@ -140,9 +165,12 @@ while True:
             meteor = Meteor(meteor_path, random_x_pos, random_y_pos, random_x_speed, random_y_speed)
             meteor_group.add(meteor)
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and laser_active:
             new_laser = Laser('Laser.png', event.pos, 15)
             laser_group.add(new_laser)
+            laser_active = False
+            laser_timer = pygame.time.get_ticks()
+            spaceship_group.sprite.discharge()
             pygame.mixer.Sound.play(laser_shoot)
 
         if event.type == pygame.KEYDOWN and spaceship_group.sprite.health <= 0:
@@ -150,6 +178,9 @@ while True:
                 spaceship_group.sprite.health = 5
                 meteor_group.empty()
                 score = 0
+            if event.key == pygame.K_q:
+                pygame.quit()
+                sys.exit()
 
     screen.fill((42, 45, 51))
 
