@@ -7,7 +7,7 @@
 [node name="Car1" type="KinematicBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 8.45, 4.8 )
+scale = Vector2( 8.45, 4.345 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
