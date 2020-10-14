@@ -1,3 +1,4 @@
+# # FORR2 - Skilaverkefni 3 - Steinn Þorkelsson
 import random
 
 
@@ -25,6 +26,10 @@ def para_random(tup1, tup2):
 def para_random_stakur(tup1, tup2):
     herra_listi = []
     domu_listi = []
+    """á meðan herra/dömu listinn er ekki = 6 þá velur það random nafn, ef að nafnið er núþegar í listanum 
+    þá setur það nafnið í listann. Ef það er núþegar í listanum þá velur það random nafn þangað til að það finnst
+    nafn sem er ekki núþegar í listanum"""
+
     while len(herra_listi) != 6:
         random_herra = random.choice(tup1)
         if random_herra not in herra_listi:
@@ -34,6 +39,7 @@ def para_random_stakur(tup1, tup2):
         random_dama = random.choice(tup2)
         if random_dama not in domu_listi:
             domu_listi.append(random_dama)
+    # nota " i + 1" vegna þess að for loopan telur frá 0 og upp
     for i in range(6):
         print(f"Random par an duplicates {i + 1}: {domu_listi[i]} og {herra_listi[i]}")
 
@@ -56,15 +62,15 @@ def byrjar_a(stafur, tup2):
 
 
 def finna_n(tup1, tup2):
-    subs = "nn"
-    res = []
+    enn = "nn"
+    listi = []
     for i in tup2:
-        if subs in i:
-            res.append(i)
+        if enn in i:
+            listi.append(i)
     for s in tup1:
-        if subs in s:
-            res.append(s)
-    print(res)
+        if enn in s:
+            listi.append(s)
+    print(listi)
 
 
 # Dæmi 2 ---------------------------------------------------------------------------------------------------------------
@@ -75,7 +81,7 @@ def finna_sima_nr(dict1, nafn):
         simanumer = dict1[nafn]
         return f"Símanúmerið hjá {nafn} er {simanumer}"
     else:
-        return f" {nafn} er ekki i simaskranni"
+        return f"{nafn} er ekki i simaskranni"
 
 
 # Dæmi 3 ---------------------------------------------------------------------------------------------------------------
@@ -86,25 +92,26 @@ def skrifa_ut_nemendur(dict1):
 
 
 def nemendur_yfir_18(dict1):
-    print()
     teljari = 0
     listi = []
     for i in dict1:
         if dict1[i] >= 18:
             teljari += 1
             listi.append(i)
-    print(f"Fjoldi nemenda sem eru yfir 18 eru: {teljari} og nofn theirra eru:")
+    print(f"Fjoldi nemenda sem eru yfir 18 eru {teljari} og nofn theirra eru:")
     for i in listi:
         print(i)
 
 
-def finna_medalaldur(dict1):
-    print()
+def finna_medalaldur_heildaraldur(dict1, val):
     heildar_aldur = 0
     for i in dict1:
         heildar_aldur += dict1[i]
     medal_aldur = heildar_aldur / 15
-    return medal_aldur
+    if val == "medal":
+        return medal_aldur
+    elif val == "heildar":
+        return heildar_aldur
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -145,7 +152,7 @@ while on:
             elif val1 == "2":
                 print()
                 print("Pararöð")
-                pararod(tup_herrar, tup_herrar)
+                pararod(tup_herrar, tup_domur)
 
             elif val1 == "3":
                 print()
@@ -192,6 +199,37 @@ while on:
         bekkur = {"Steinn": 17, "Kolbeinn": 18, "Tryggvi": 19, "Hugi": 16, "Starri": 20, "Bessi": 19,
                   "Renata": 18, "Thuridur": 20, "Sigridur": 16, "Maria": 19, "Eilidh": 17, "Nanna": 16,
                   "Ulfur": 16, "Emma": 17, "Sigmundur": 19}
+        on3 = True
+        while on3:
+            print()
+            print("------Skráning í bekk------")
+            print("1. Skrifa út alla nemendur")
+            print("2. Allir nemendur sem eru 18 ára og yfir")
+            print("3. Meðalaldur bekkjarins")
+            print("4. Heildaraldur bekkjarins")
+            print("5. Hætta")
+            val3 = input("Veldu fall:")
+            if val3 == "1":
+                print()
+                print("Allir nemendurnir:")
+                skrifa_ut_nemendur(bekkur)
+
+            elif val3 == "2":
+                print()
+                print("Nemendur 18 ára og yfir:")
+                nemendur_yfir_18(bekkur)
+
+            elif val3 == "3":
+                print()
+                print("Meðalaldur bekkjarins er:", finna_medalaldur_heildaraldur(bekkur, "medal"))
+
+            elif val3 == "4":
+                print()
+                print("Heildaraldur bekkjarins er:", finna_medalaldur_heildaraldur(bekkur, "heildar"))
+
+            elif val3 == "5":
+                on3 = False
 
     elif val == "4":
+        print("Bless :)")
         on = False
