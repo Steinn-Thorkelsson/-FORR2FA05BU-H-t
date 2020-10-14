@@ -208,7 +208,7 @@ while on:
             print("3. Meðalaldur bekkjarins")
             print("4. Heildaraldur bekkjarins")
             print("5. Hætta")
-            val3 = input("Veldu fall:")
+            val3 = input("Veldu fall: ")
             if val3 == "1":
                 print()
                 print("Allir nemendurnir:")
@@ -218,7 +218,7 @@ while on:
                 print()
                 print("Nemendur 18 ára og yfir:")
                 nemendur_yfir_18(bekkur)
-
+                print()
             elif val3 == "3":
                 print()
                 print("Meðalaldur bekkjarins er:", finna_medalaldur_heildaraldur(bekkur, "medal"))
