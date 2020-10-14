@@ -100,7 +100,7 @@ def nemendur_yfir_18(dict1):
             listi.append(i)
     print(f"Fjoldi nemenda sem eru yfir 18 eru {teljari} og nofn theirra eru:")
     for i in listi:
-        print(i)
+        print(i,dict1[i], end=", ")
 
 
 def finna_medalaldur_heildaraldur(dict1, val):
