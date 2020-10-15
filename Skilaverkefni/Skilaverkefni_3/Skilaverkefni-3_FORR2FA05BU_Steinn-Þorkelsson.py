@@ -130,6 +130,7 @@ while on:
         on1 = True
 
         while on1:
+            val1_listi = []
             print()
             print("--Danspörin--")
             print("1. Prenta Tuple-in")
@@ -202,13 +203,13 @@ while on:
         on3 = True
         while on3:
             print()
+            val3_listi = ["1. Skrifa út alla nemendur", "2. Allir nemendur sem eru 18 ára og yfir",
+                          "3. Meðalaldur bekkjarins", "4. Heildaraldur bekkjarins", "5. Hætta"]
             print("------Skráning í bekk------")
-            print("1. Skrifa út alla nemendur")
-            print("2. Allir nemendur sem eru 18 ára og yfir")
-            print("3. Meðalaldur bekkjarins")
-            print("4. Heildaraldur bekkjarins")
-            print("5. Hætta")
+            for i in val3_listi:
+                print(i)
             val3 = input("Veldu fall: ")
+
             if val3 == "1":
                 print()
                 print("Allir nemendurnir:")
