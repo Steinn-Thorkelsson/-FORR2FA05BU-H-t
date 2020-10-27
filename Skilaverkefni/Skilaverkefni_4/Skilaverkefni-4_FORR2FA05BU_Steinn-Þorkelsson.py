@@ -67,10 +67,6 @@ def prenta_tiu(listi):
 # 2A
 def primtolu_listi():
     prim_listi = []
-    deila_med = [2, 3, 5, 7, 11]
-    teljari = 0
-    #        if t % 2 != 0 and t % 3 != 0:
-    #             prim_listi.append(t)
     for num in range(0, 101):
         if num > 1:
             for i in range(2, num):
