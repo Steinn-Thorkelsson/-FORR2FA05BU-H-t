@@ -111,6 +111,55 @@ skrifaiskra(fjorda_hver_tala_listi, "fjorda.txt")
 
 print(fjorda_hver_tala(lesa_primtolur))
 
+# Liður 3 --------------------------------------------------------------------------------------------------------------
+tuple1 = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+tuple2 = ("a", "b", "c", "d", "e", "f", "g", "h")
+tuple3 = ("konni", 123, "sponni", 234)
+tuple_listi = [tuple1, tuple2, tuple3]
+
+
+def skrifa_tup_skra(tupl, nafntxt):
+    skra = open(nafntxt, 'a')
+    skra.write(str(tuple(tupl)) + "\n")
+    skra.close()
+
+
+def lesa_tup_skra(nafntxt):
+    listi = []
+    skra = open(nafntxt, 'r')
+    for x in skra.readlines():
+        x = x.strip("\n")
+        listi.append(x)
+    return listi
+
+
+skrifa_tup_skra(tuple1, "tupplur.txt")
+skrifa_tup_skra(tuple2, "tupplur.txt")
+skrifa_tup_skra(tuple3, "tupplur.txt")
+lesa_tup = lesa_tup_skra("tupplur.txt")
+print(lesa_tup)
+
+
+# Lidur 4 --------------------------------------------------------------------------------------------------------------
+
+def skrifa_dict_skra(dicta, nafntxt):
+    skra = open(nafntxt, "a")
+    skra.write(str(dict(dicta)) + "\n")
+    skra.close()
+
+
+def lesa_dict_skra(nafntxt):
+    skra = open(nafntxt)
+    innihald = skra.read()
+    innihald = eval(innihald)
+    return innihald
+
+
+def prenta_dict(dicta):
+    for x in dicta:
+        print(x, dicta[x])
+
+
 on = True
 
 while on:
@@ -206,7 +255,31 @@ while on:
         pass
 
     elif val == "4":
-        pass
+        on4 = True
 
+        dict4 = {"Steinn": 6956839, "Renata": 7717773, "Tryggvi": 7783910, "Kolbeinn": 8589005, "Stefan": 6909790}
+
+        while on4:
+
+            val4_listi = ["------ Liður 4 ------", "------ Dictionary ------", "1. Skrifa tuple í skrá, lesa það síðan og prenta það"
+                          , "2. Bæta við 2 dictionary í skránna, lesa og prenta það", "3. Hætta"]
+            for v in val4_listi:
+                print(v)
+            val4 = input("Veldu Fall: ")
+
+            if val4 == "1":
+                skrifa_dict_skra(dict4, "dict.txt")
+                lesa_dict = lesa_dict_skra("dict.txt")
+                prenta_dict(lesa_dict)
+            elif val4 == "2":
+                dict5 = {"Hugi": 8384932, "Starri": 6789930, "Eilidh": 7789938, "Maria": 8939779, "Thuridur": 6949778}
+                dict6 = {"Abasi": 5525211, "Van Halen": 8756492, "Petrucci": 7813422, "Young": 8184174, "Thorkell": 8589321}
+
+                skrifa_dict_skra(dict5, "dict.txt")
+                skrifa_dict_skra(dict6, "dict.txt")
+                lesa_dict = lesa_dict_skra("dict.txt")
+                prenta_dict(lesa_dict)
+            elif val4 == "3":
+                on4 = False
     elif val == "5":
         break

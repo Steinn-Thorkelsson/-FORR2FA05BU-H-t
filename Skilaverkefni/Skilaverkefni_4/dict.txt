@@ -1,0 +1,3 @@
+{'Steinn': 6956839, 'Renata': 7717773, 'Tryggvi': 7783910, 'Kolbeinn': 8589005, 'Stefan': 6909790}
+{'Hugi': 8384932, 'Starri': 6789930, 'Eilidh': 7789938, 'Maria': 8939779, 'Thuridur': 6949778}
+{'Abasi': 5525211, 'Van Halen': 8756492, 'Petrucci': 7813422, 'Young': 8184174, 'Thorkell': 8589321}
