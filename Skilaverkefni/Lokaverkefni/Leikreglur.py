@@ -1,10 +1,9 @@
 # from hermenn_func import bua_til_hermann
 import hermenn_func as hermenn
-import time
-
-pessar = hermenn.bua_til_hermann("Pessi")
-hettir = hermenn.bua_til_hermann("Hattur")
-dreyrar = hermenn.bua_til_hermann("Dreyri")
+# import time
+pessar = hermenn.bua_til_hermann("Pessar")
+hettir = hermenn.bua_til_hermann("Hattar")
+dreyrar = hermenn.bua_til_hermann("Dreyrar")
 print(pessar[1].get_afl())
 
 aettbalka_listi = [pessar, hettir, dreyrar]
@@ -24,8 +23,9 @@ def bardagi(hermadur_1, hermadur_2):
     while on:
         hermadur_1.meidast(hermadur_2.get_afl())
         hermadur_2.meidast(hermadur_2.get_afl())
-
+        print()
         print(f"{hermadur_1.get_aettbalkur()} og {hermadur_2.get_aettbalkur()} ráðast á hvorn annan")
+        print()
         print(
             f"{hermadur_1.get_aettbalkur()} meiðir {hermadur_2.get_aettbalkur()} um {hermadur_1.get_afl()} með {hermadur_1.get_vopn()}")
         print(
@@ -33,7 +33,7 @@ def bardagi(hermadur_1, hermadur_2):
 
         hermadur_1.missa_afl()
         hermadur_2.missa_afl()
-
+        print()
         print(f"{hermadur_1.get_aettbalkur()} er með {hermadur_1.get_lif()} Lif og {hermadur_1.get_afl()} Afl")
         print(f"{hermadur_2.get_aettbalkur()} er með {hermadur_2.get_lif()} Lif og {hermadur_2.get_afl()} Afl")
 
@@ -41,60 +41,82 @@ def bardagi(hermadur_1, hermadur_2):
             on = False
         if hermadur_2.daudur():
             on = False
-        time.sleep(2)
-
+        # time.sleep(2)
+        input("Ýttu á Enter til að halda áfram: ")
     if hermadur_1.get_lif() > hermadur_2.get_lif():
-
+        print()
         print(f"{hermadur_1.get_aettbalkur()} vann bardagann")
         sigurvegari = 1
 
     elif hermadur_2.get_lif() > hermadur_1.get_lif():
-
+        print()
         print(f"{hermadur_2.get_aettbalkur()} vann bardagann")
         sigurvegari = 2
 
     else:
+        print()
         print(f"{hermadur_1.get_aettbalkur()} og {hermadur_2.get_aettbalkur()} drápust báðir í bardaganum")
 
     return sigurvegari
 
+# Gá hvort að annarhvor listinn sé búinn að klárast
 
-keppendur = []
-bardagi(pessar[0], hettir[2])
-print(pessar[0].daudur())
-# while len(keppendur[0]) > 0 or len(keppendur[1]) > 0:
-#     print()
-#     print("Velkomin i staersta bardaga sögunnar")
-#     print("1. Berjast sjálfur")
-#     print("2. Tölvan berst fyrir þig")
-#
-#     val = input("Veldu aðgergð: ")
-#
-#     if val == "1":
-#         print()
-#         print("1. Pessar")
-#         print("2. Hettir")
-#         print("3. Dreyrar")
-#
-#         val_1 = input("Veldu ættbálk: ")
-#         print()
-#         if val_1 == "1":
-#             print("Þú hefur valið Pessa.")
-#             for i in aettbalka_listi[0]:
-#                 notanda_aettbalkur.append(i)
-#
-#         elif val_1 == "2":
-#             print("Þú hefur valið Hetti.")
-#             for i in aettbalka_listi[1]:
-#                 notanda_aettbalkur.append(i)
-#
-#         elif val_1 == "3":
-#             print("Þú hefur valið Dreyra.")
-#             for i in aettbalka_listi[2]:
-#                 notanda_aettbalkur.append(i)
-#
-#         for i in notanda_aettbalkur:
-#             print(i)
-#         bardagi()
-#     elif val == "2":
-#         bardagi()
+def sigurvegari(listi):
+    if len(listi[0]) > 0 and len(listi[1]) > 0:
+        return True
+    else:
+        return False
+
+
+def velja_keppendur(listi):
+    keppanda_listi = []
+    on_v = True
+    while on_v:
+        print()
+        print("1. Pessar")
+        print("2. Hettir")
+        print("3. Dreyrar")
+
+        val = int(input("Veldu lid 1: "))
+        val_2 = int(input("Veldu lid 2: "))
+
+        if val == val_2:
+            print("Ekki er haegt ad velja sama lidid tvisvar")
+
+        else:
+            keppanda_listi.append(listi[val - 1])
+            keppanda_listi.append(listi[val_2 - 1])
+            on_v = False
+    return keppanda_listi
+
+
+keppendur = velja_keppendur(aettbalka_listi)
+nofn = [keppendur[0][0].get_aettbalkur(), keppendur[1][0].get_aettbalkur()]
+on = True
+
+while on:
+    # vantar ef að hermaður er ekki dauður að hann haldi áfram í næsta bardaga
+    if keppendur[0] and keppendur[1]:
+        bardagi(keppendur[0][0], keppendur[1][0])
+
+        if keppendur[0][0].daudur():
+            keppendur[0].pop(0)
+        if keppendur[1][0].daudur():
+            keppendur[1].pop(0)
+        else:
+            keppendur[0].pop(0)
+            keppendur[1].pop(0)
+    else:
+        if len(keppendur[0]) > len(keppendur[1]):
+            print()
+            print(f"{nofn[0]} unnu.")
+        elif len(keppendur[1]) > len(keppendur[0]):
+            print()
+            print(f"{nofn[1]} unnu.")
+        else:
+            print()
+            print(f"{nofn[0]} og {nofn[1]} útrýmdu hvorn annan.")
+        on = False
+
+
+
