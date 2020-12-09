@@ -1,18 +1,18 @@
 # from hermenn_func import bua_til_hermann
 import hermenn_func as hermenn
+
 # import time
 pessar = hermenn.bua_til_hermann("Pessar")
 hettir = hermenn.bua_til_hermann("Hattar")
 dreyrar = hermenn.bua_til_hermann("Dreyrar")
-print(pessar[1].get_afl())
 
 aettbalka_listi = [pessar, hettir, dreyrar]
 
 notanda_aettbalkur = []
 
-for i in aettbalka_listi:
-    for h in i:
-        print(h)
+#for i in aettbalka_listi:
+#    for h in i:
+#        print(h)
 
 
 def bardagi(hermadur_1, hermadur_2):
@@ -59,6 +59,7 @@ def bardagi(hermadur_1, hermadur_2):
 
     return sigurvegari
 
+
 # Gá hvort að annarhvor listinn sé búinn að klárast
 
 def sigurvegari(listi):
@@ -90,12 +91,24 @@ def velja_keppendur(listi):
     return keppanda_listi
 
 
+def leikreglur():
+    strengur = f"\nHver hermaður fær random afl og líf\n hermaðurinn fær random Vopn sem meiða öll mismunandi \n" \
+               f"Exi bætir 1 afl vid, Sverð 2, Spjöt meiðir 3\n \n" \
+               f"Leikreglur: \n Báðir hermenn ráðast á hvorn annan á sama tíma, \n" \
+               f"Sá sem sigrar bardagan heldur áfram í næsta bardaga"
+
+    return strengur
+
+
+print(leikreglur())
+print()
+input("Ýttu á enter til þess að byrja leikinn: ")
 keppendur = velja_keppendur(aettbalka_listi)
+
 nofn = [keppendur[0][0].get_aettbalkur(), keppendur[1][0].get_aettbalkur()]
 on = True
 
 while on:
-    # vantar ef að hermaður er ekki dauður að hann haldi áfram í næsta bardaga
     if keppendur[0] and keppendur[1]:
         bardagi(keppendur[0][0], keppendur[1][0])
 
@@ -117,6 +130,3 @@ while on:
             print()
             print(f"{nofn[0]} og {nofn[1]} útrýmdu hvorn annan.")
         on = False
-
-
-
