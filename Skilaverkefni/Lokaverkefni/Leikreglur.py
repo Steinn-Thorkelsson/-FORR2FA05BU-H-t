@@ -10,7 +10,8 @@ aettbalka_listi = [pessar, hettir, dreyrar]
 
 notanda_aettbalkur = []
 
-#for i in aettbalka_listi:
+
+# for i in aettbalka_listi:
 #    for h in i:
 #        print(h)
 
@@ -60,15 +61,7 @@ def bardagi(hermadur_1, hermadur_2):
     return sigurvegari
 
 
-# Gá hvort að annarhvor listinn sé búinn að klárast
-
-def sigurvegari(listi):
-    if len(listi[0]) > 0 and len(listi[1]) > 0:
-        return True
-    else:
-        return False
-
-
+# Fall til þess að velja 2 ættbálka og skila lista með báðum ættbálkunum
 def velja_keppendur(listi):
     keppanda_listi = []
     on_v = True
@@ -103,12 +96,14 @@ def leikreglur():
 print(leikreglur())
 print()
 input("Ýttu á enter til þess að byrja leikinn: ")
+
 keppendur = velja_keppendur(aettbalka_listi)
 
 nofn = [keppendur[0][0].get_aettbalkur(), keppendur[1][0].get_aettbalkur()]
-on = True
 
-while on:
+on_l = True
+
+while on_l:
     if keppendur[0] and keppendur[1]:
         bardagi(keppendur[0][0], keppendur[1][0])
 
@@ -129,4 +124,4 @@ while on:
         else:
             print()
             print(f"{nofn[0]} og {nofn[1]} útrýmdu hvorn annan.")
-        on = False
+        on_l = False
